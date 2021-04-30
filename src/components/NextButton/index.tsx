@@ -7,7 +7,7 @@ import {  Text } from 'react-native';
 export function NextButton({title, ...rest}:ButtonProps)  {
 
   return (
-    <Next>
+    <Next {...rest}>
        <Feather name="chevron-right" style={{color:'#fff', fontSize:28}} />
     </Next>
   );

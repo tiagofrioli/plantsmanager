@@ -1,11 +1,10 @@
 import React from 'react';
-
- import { Text } from './styles';
+import{Text} from 'react-native';
 
 const Typography: React.FC = ({children, ...rest}) => {
   return (
 
-   <Text>
+   <Text {...rest}>
       {children}
    </Text>
 
