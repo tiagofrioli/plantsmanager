@@ -20,7 +20,7 @@ const UserIdentification: React.FC = () => {
 
   function handleSubmit(){
     navigation.navigate('Confirmation');
-    console.log('asdasas')
+   
   }
 
   function handleInputBlur(){
