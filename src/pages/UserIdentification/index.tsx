@@ -4,7 +4,7 @@ import { SafeAreaView, View , Text, TextInput, KeyboardAvoidingView, Platform} f
 import Button from '../../components/Button';
 import Typography from '../../components/Typography';
 import colors from '../../styles/colors';
-import { ButtonFooter, Container, Content, Form, Input } from './styles';
+import { ButtonFooter, Container, Content, Form, Input, Title } from './styles';
 
 
 // import { Container } from './styles';
@@ -43,7 +43,7 @@ const UserIdentification: React.FC = () => {
        <Content>
         <Form>
          <Text style={{fontSize: 52}} >😄</Text>
-         <Typography>Como podemos chamar você?</Typography> 
+         <Title>Como podemos chamar você?</Title> 
          <Input 
                 style={[(isFocused || isFilled ) && {borderColor: colors.green}]}
                  placeholder="Digite um nome" 

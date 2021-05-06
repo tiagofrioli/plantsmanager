@@ -1,5 +1,8 @@
 import styled from 'styled-components/native';
+import Typography from '../../components/Typography';
+import colors from '../../styles/colors';
 import palette from '../../styles/colors';
+import fonts from '../../styles/fonts';
 
 export const Container = styled.SafeAreaView`
  flex:1;
@@ -11,6 +14,16 @@ export const Container = styled.SafeAreaView`
 export const Content = styled.SafeAreaView`
  flex: 1;
  width: 100%;
+`;
+
+export const Title = styled(Typography)`
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: bold;
+  text-align: center;
+  color: ${colors.heading};
+  margin-top: 20px;
+  font-family: ${fonts.heading};
 `;
 
 export const Form = styled.View`

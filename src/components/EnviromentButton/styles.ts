@@ -6,16 +6,16 @@ import fonts from '../../styles/fonts';
 import { EnviromentProps } from './types';
 
 export const Title = styled(Typography)`
-  color: ${colors.green};
-  font-family: ${fonts.heading};
+  color: ${colors.green_dark};
+  font-family: ${fonts.text};
   `;
 
 
-/*   export const TitleActive = styled(Typography)`
+  export const TitleActive = styled(Typography)`
     color: ${colors.green};
     font-family: ${fonts.heading};
   `;
- */
+
 
 export const ContainerButton = styled(RectButton)`
   background-color: ${colors.shape};
@@ -24,6 +24,8 @@ export const ContainerButton = styled(RectButton)`
   justify-content: center;
   align-items: center;
   border-radius: 12px;
+  margin-right: 5px;;
+
 `;
 
 

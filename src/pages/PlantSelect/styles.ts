@@ -18,3 +18,9 @@ export const TextQuestion = styled(Typography)`
     margin-top: 15px;
     margin-left: 30px;    
 `;
+
+export const ContainerPlants = styled.View`
+    flex: 1;
+    padding: 0 32px;
+    justify-content: center;
+`;
