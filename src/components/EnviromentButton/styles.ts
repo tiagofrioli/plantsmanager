@@ -5,31 +5,18 @@ import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 import { EnviromentProps } from './types';
 
-export const Title = styled(Typography)`
-  color: ${colors.green_dark};
-  font-family: ${fonts.text};
+export const Title = styled(Typography)<EnviromentProps>`
+  color: ${props => props.active ? colors.heading : colors.green_dark};
+  font-family: ${props => props.active ? fonts.heading : fonts.text};
   `;
 
 
-  export const TitleActive = styled(Typography)`
-    color: ${colors.green};
-    font-family: ${fonts.heading};
-  `;
-
-
-export const ContainerButton = styled(RectButton)`
-  background-color: ${colors.shape};
+export const ContainerButton = styled.TouchableOpacity<EnviromentProps>`
+  background-color: ${props => props.active ? colors.green_light : colors.shape};
   height: 40px;
   width: 76px;
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  margin-right: 5px;;
-
-`;
-
-
-export const ButtonActive = styled(RectButton)`
-
-  background-color: ${colors.green_light};
+  margin-right: 8px;
 `;

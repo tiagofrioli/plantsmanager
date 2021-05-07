@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import CardPrimary from '../../components/Cards/CardPrimary';
 import EnviromentButton from '../../components/EnviromentButton';
@@ -8,55 +8,118 @@ import Header from '../../components/Header';
 import api from '../../service/api';
 import { Container, ContainerPlants, TextQuestion } from './styles';
 import { PlantsProps } from './types';
+import Loading from '../../components/Loading';
+import colors from '../../styles/colors';
 
 
 const PlantSelect: React.FC = () => {
 
   const [environments, setEnvironments] = useState<EnviromentProps[]>([]);
   const [plants, setPlants] = useState<PlantsProps[]>([]);
+  const [enviromentSelected, setEnviromentSelected] = useState('all');
+  const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([])
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [nextPage, setNextPage] = useState(false);
+  const [loadedAll, setLoadedAll] =useState(false)
+
+
+  function handleNextPage(distance:number){
+      if(distance > 1)
+         return;
+      setNextPage(true);
+      setPage(oldValue => oldValue + 1);
+
+      fetchPlants();
+  } 
+
+  async function fetchPlants(){
+    const { data } = await api.get(`plants?_sort=name&_order=asc&_page=${page}&_limit=6`);
+    if(!data)
+        return setLoading(true);
+    if(page > 1){
+      setPlants(oldValue => [...oldValue, ...data]);
+      setFilteredPlants(oldValue => [...oldValue, ...data]);
+    } else {
+      setPlants(data);
+      setFilteredPlants(data);
+    }
+        
+    setLoading(false);
+    setNextPage(false);
+  }
+ 
 
   useEffect(()=> {
       
     async function fetchEnviroment(){
-      const { data } = await api.get('plants_environments');
-      setEnvironments(data);
-    }
-
-
-    async function fetchPlants(){
-      const { data } = await api.get('plants');
-      setPlants(data);
+      const { data } = await api.get('plants_environments?_sort=title&_order=asc');
+      setEnvironments([{
+        key: 'all',
+        title: "Todos"
+      },
+        ...data
+    ]);
     }
 
     fetchEnviroment();
     fetchPlants();
-  }, []);
+
+    }, []);
+
+
+
+  function handleEnviromentSelected(enviroment: string){
+    setEnviromentSelected(enviroment);
+
+    if(enviroment === 'all')
+      return setFilteredPlants(plants);
+    
+    const filtered = plants.filter(plant => plant.environments.includes(enviroment));
+
+    setFilteredPlants(filtered);
+  }
+
+
+
+  if(loading)
+      return <Loading />
 
   return(
       <>
       <Header />
       <Container>
            <TextQuestion>{`Em qual ambiente\nvocê quer colocar sua planta ?`}</TextQuestion>
-      <View>
-       {/*  <FlatList 
+      <View style={{marginLeft: 36}}>
+        <FlatList 
             data={environments}
-            renderItem={({item, index})=>(
-              <EnviromentButton key={index} title={item} active/>
+            renderItem={({item})=>(
+              <EnviromentButton
+                 onPress={()=> handleEnviromentSelected(item.key)} 
+                 title={item.title}
+                 active={item.key === enviromentSelected} />
+
             )}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{  height: 40, justifyContent: "center", paddingBottom: 5, marginVertical:32}}
-        /> */}
+        />
       </View>
       <ContainerPlants>
           <FlatList 
-              data={plants}
+              data={filteredPlants}
               renderItem={({item, index})=> (
                 <CardPrimary key={index} data={item} />
               )}
               showsVerticalScrollIndicator={false}
               numColumns={2}
-              
+              onEndReachedThreshold={0.1}
+              onEndReached={({distanceFromEnd}) => handleNextPage(distanceFromEnd)}
+              ListFooterComponent={
+                nextPage ?  
+                  <ActivityIndicator color={colors.green} />
+                  : <></>
+                }
           />
       </ContainerPlants>
       </Container>
