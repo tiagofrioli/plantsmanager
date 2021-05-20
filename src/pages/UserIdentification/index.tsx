@@ -1,13 +1,11 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/core';
 import React, { useState } from 'react';
-import { SafeAreaView, View , Text, TextInput, KeyboardAvoidingView, Platform} from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, Text } from 'react-native';
 import Button from '../../components/Button';
-import Typography from '../../components/Typography';
 import colors from '../../styles/colors';
 import { ButtonFooter, Container, Content, Form, Input, Title } from './styles';
 
-
-// import { Container } from './styles';
 
 const UserIdentification: React.FC = () => {
 
@@ -18,7 +16,13 @@ const UserIdentification: React.FC = () => {
   const navigation = useNavigation();
 
 
-  function handleSubmit(){
+ async function handleSubmit(){
+
+    if(!name)
+      return Alert.alert("Coloque seu nome 😢");
+
+   await AsyncStorage.setItem('@plantmanager:user', name);  
+
     navigation.navigate('Confirmation');
    
   }
@@ -52,7 +56,7 @@ const UserIdentification: React.FC = () => {
                  onChangeText={handleInputChange}
          />
          <ButtonFooter>
-             <Button onPress={handleSubmit} />
+             <Button title="Confirmar" onPress={handleSubmit} />
          </ButtonFooter>
         </Form>
      </Content>

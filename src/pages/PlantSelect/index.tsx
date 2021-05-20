@@ -10,6 +10,7 @@ import { Container, ContainerPlants, TextQuestion } from './styles';
 import { PlantsProps } from './types';
 import Loading from '../../components/Loading';
 import colors from '../../styles/colors';
+import { useNavigation } from '@react-navigation/core';
 
 
 const PlantSelect: React.FC = () => {
@@ -21,7 +22,9 @@ const PlantSelect: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [nextPage, setNextPage] = useState(false);
-  const [loadedAll, setLoadedAll] =useState(false)
+
+  
+  const navigation = useNavigation();
 
 
   function handleNextPage(distance:number){
@@ -80,6 +83,12 @@ const PlantSelect: React.FC = () => {
     setFilteredPlants(filtered);
   }
 
+  function handlePlantSelect(plant: PlantsProps){
+
+    navigation.navigate('PlantSave');
+    
+  }
+
 
 
   if(loading)
@@ -93,7 +102,8 @@ const PlantSelect: React.FC = () => {
       <View style={{marginLeft: 36}}>
         <FlatList 
             data={environments}
-            renderItem={({item})=>(
+            keyExtractor={(item)=> item.key}
+            renderItem={({item, index})=>(
               <EnviromentButton
                  onPress={()=> handleEnviromentSelected(item.key)} 
                  title={item.title}
@@ -109,7 +119,10 @@ const PlantSelect: React.FC = () => {
           <FlatList 
               data={filteredPlants}
               renderItem={({item, index})=> (
-                <CardPrimary key={index} data={item} />
+                <CardPrimary key={index} 
+                            data={item} 
+                            onPress={()=> handlePlantSelect(item)}
+                  />
               )}
               showsVerticalScrollIndicator={false}
               numColumns={2}

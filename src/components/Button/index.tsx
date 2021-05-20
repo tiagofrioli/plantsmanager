@@ -6,14 +6,14 @@ import fonts from '../../styles/fonts';
 import { ContainerButton } from './styles';
 import { ButtonProps } from './types';
 
-// import { Container } from './styles';
 
-export function Button({...rest}:ButtonProps ) {
+
+export function Button({title, ...rest}:ButtonProps ) {
   return (
  
      <ContainerButton {...rest} >
         <Text style={{fontSize: 16, color:"#fff"}}>
-          Confirmar
+          {title}
         </Text>
      </ContainerButton>
 

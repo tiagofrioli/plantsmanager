@@ -18,7 +18,7 @@ const Confirmation: React.FC = () => {
            <Title>Prontinho!</Title>
            <Subtitle>Agora vamos começar a cuidar das suas plantinhas com muito cuidado</Subtitle>
         <Footer>
-           <Button onPress={handleMoveOn} />
+           <Button title="Começar" onPress={handleMoveOn} />
         </Footer>
         </Content>
      </Container>
