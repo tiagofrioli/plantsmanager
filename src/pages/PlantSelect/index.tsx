@@ -85,7 +85,7 @@ const PlantSelect: React.FC = () => {
 
   function handlePlantSelect(plant: PlantsProps){
 
-    navigation.navigate('PlantSave');
+    navigation.navigate('PlantSave', { plant });
     
   }
 
