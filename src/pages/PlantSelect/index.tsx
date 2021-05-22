@@ -7,10 +7,10 @@ import { EnviromentProps } from '../../components/EnviromentButton/types';
 import Header from '../../components/Header';
 import api from '../../service/api';
 import { Container, ContainerPlants, TextQuestion } from './styles';
-import { PlantsProps } from './types';
 import Loading from '../../components/Loading';
 import colors from '../../styles/colors';
 import { useNavigation } from '@react-navigation/core';
+import { PlantsProps } from '../../libs/storage';
 
 
 const PlantSelect: React.FC = () => {

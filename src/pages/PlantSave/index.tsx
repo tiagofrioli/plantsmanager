@@ -11,7 +11,7 @@ import { format, isBefore } from 'date-fns';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
-
+import {loadPlant, plantSave} from '../../libs/storage';
 
 
 const PlantSave: React.FC = () => {
@@ -43,6 +43,21 @@ const PlantSave: React.FC = () => {
     setShowDatePicker(oldState => !oldState);
   }
 
+  async function handleSave(){
+
+
+    try {
+
+      await plantSave({
+        ...plant,
+        dateTimeNotification: selectedDateTime
+      })
+        
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
 
   return (
 
@@ -51,7 +66,7 @@ const PlantSave: React.FC = () => {
 
         <SvgFromUri uri="" height={150} width={150} />
 
-        <Title>{plant.name}</Title>
+        <Title>{}</Title>
         <About>{plant.about}</About>
 
       </ContainerInfo>
@@ -66,7 +81,7 @@ const PlantSave: React.FC = () => {
         <AlertLabel>Escolha o melhor horário para ser lembrado:</AlertLabel>
 
         { showDatePicker && <DateTimePicker value={selectedDateTime} mode="time" display="spinner" 
-            onChange={()=> handleChangeTime}
+            onChange={handleChangeTime}
           />}
 
           {
@@ -76,7 +91,7 @@ const PlantSave: React.FC = () => {
                 alignItems:'center',
                 paddingVertical: 40,
               }}
-               onPress={()=> handleNewTime()}>
+               onPress={handleNewTime}>
                    <Text 
                     style={{
                     fontSize: 24,
@@ -85,7 +100,7 @@ const PlantSave: React.FC = () => {
               </TouchableOpacity>
             )
           }
-        <Button title="Cadastrar planta" onPress={()=>{}}  />
+        <Button title="Cadastrar planta" onPress={handleSave}  />
 
       </ContainerController>
 

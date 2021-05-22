@@ -1,15 +1,6 @@
-export interface Params{
-  plant: {
-    id: string;
-    name: string;
-    about: string;
-    water_tips: string;
-    photo: string;
-    environments: string;
-    frequency:{
-      times: number;
-      repeat_every: string;
-    }
+import { PlantsProps } from "../../libs/storage";
 
-  }
+
+export interface Params{
+  plant: PlantsProps;
 }
