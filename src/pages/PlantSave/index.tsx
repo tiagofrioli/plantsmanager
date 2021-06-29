@@ -4,7 +4,7 @@ import { SvgFromUri } from 'react-native-svg';
 import water from '../../assets/waterdrop.png';
 import Button from '../../components/Button';
 import { About, AlertLabel, Container, ContainerController, ContainerInfo, TipContainer, TipImage, TipTitle, Title } from './styles';
-import { useRoute } from '@react-navigation/core'
+import { useNavigation, useRoute } from '@react-navigation/core'
 import { Params } from './types';
 import DateTimePicker, {Event} from  '@react-native-community/datetimepicker'
 import { format, isBefore } from 'date-fns';
@@ -20,6 +20,7 @@ const PlantSave: React.FC = () => {
   const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios');
   const route = useRoute();
   const { plant } = route.params as Params;
+  const navigation = useNavigation();
 
   function handleChangeTime(event: Event, dateTime: Date | undefined){
 
@@ -51,7 +52,14 @@ const PlantSave: React.FC = () => {
       await plantSave({
         ...plant,
         dateTimeNotification: selectedDateTime
-      })
+      });
+      navigation.navigate('Confirmation', {
+        title: 'Tudo certo',
+        subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado',
+        buttonTitle: 'Muito Obrigado',
+        icon: 'hug', 
+        nextScreen: 'MyPlants'
+      });
         
     } catch (error) {
       throw new Error(error)

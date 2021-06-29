@@ -1,6 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import Confirmation from '../pages/Confirmation';
+import MyPlants from '../pages/MyPlants';
 import PlantSave from '../pages/PlantSave';
 import PlantSelect from '../pages/PlantSelect';
 import UserIdentification from '../pages/UserIdentification';
@@ -17,6 +18,7 @@ const navigation: React.FC = () => (
         <stackNavigation.Screen name="Confirmation" component={Confirmation}/>
         <stackNavigation.Screen name="PlantSelect" component={PlantSelect}/>
         <stackNavigation.Screen name="PlantSave" component={PlantSave}/>
+        <stackNavigation.Screen name="MyPlants" component={MyPlants}/>
      </stackNavigation.Navigator>
   );
 
