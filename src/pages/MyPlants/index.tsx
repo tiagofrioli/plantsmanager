@@ -7,6 +7,7 @@ import { Container, Plants, PlantsTitle, SpotLight, SpotLightImage, SpotLightTex
 import { loadPlant, PlantsProps } from '../../libs/storage';
 import { formatDistance } from 'date-fns/esm';
 import { pt } from 'date-fns/locale';
+import CardSecondary from '../../components/Cards/CardSecondary';
 
 const MyPlants: React.FC = () => {
 
@@ -41,7 +42,7 @@ const MyPlants: React.FC = () => {
         <SpotLight>
           <SpotLightImage source={water}  />
           <SpotLightText>
-              Texto
+              {nextWatered}
           </SpotLightText>
         </SpotLight>
         <Plants>
@@ -52,7 +53,7 @@ const MyPlants: React.FC = () => {
             data={myPlants}
             keyExtractor={(item)=> String(item.id)}
             renderItem={({item})=> (
-              <Text>Elemnto</Text>
+              <CardSecondary data={item} />
             )}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{flex: 1}}

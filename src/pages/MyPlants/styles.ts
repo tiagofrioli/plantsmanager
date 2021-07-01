@@ -39,8 +39,6 @@ export const SpotLightText = styled(Typography)`
   flex: 1;
   color: ${colors.blue};
   padding: 0 20px;
-  text-align: justify;
-
 `;
 
 export const Plants = styled.View`
