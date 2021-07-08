@@ -44,3 +44,17 @@ export const Time = styled(Typography)`
   color: ${colors.body_dark};
 `;
 
+
+export const ButtonRemove = styled(RectButton)`
+  width: 100px;
+  height: 85px;
+  background-color: ${colors.red};
+  margin-top: 15px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  position: relative;
+  right: 20px;
+`;
+

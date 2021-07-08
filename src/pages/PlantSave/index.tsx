@@ -8,7 +8,7 @@ import { useNavigation, useRoute } from '@react-navigation/core'
 import { Params } from './types';
 import DateTimePicker, {Event} from  '@react-native-community/datetimepicker'
 import { format, isBefore } from 'date-fns';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 import {loadPlant, plantSave} from '../../libs/storage';
@@ -69,10 +69,11 @@ const PlantSave: React.FC = () => {
 
   return (
 
+    <ScrollView showsVerticalScrollIndicator={false} >
     <Container>
       <ContainerInfo>
 
-        <SvgFromUri uri="" height={150} width={150} />
+        <SvgFromUri uri={plant.photo} height={150} width={150} />
 
         <Title>{}</Title>
         <About>{plant.about}</About>
@@ -113,6 +114,7 @@ const PlantSave: React.FC = () => {
       </ContainerController>
 
     </Container>
+    </ScrollView>  
   );
 }
 
